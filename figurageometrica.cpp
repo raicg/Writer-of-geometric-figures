@@ -1,4 +1,4 @@
 #include "figurageometrica.h"
 
-FiguraGeometrica::FiguraGeometrica()
+figuraGeometrica::figuraGeometrica()
 {}

@@ -2,7 +2,7 @@
 #define RETA_H
 #include <figurageometrica.h>
 
-class Reta : public FiguraGeometrica{
+class Reta : public figuraGeometrica{
 
     int x0,x1;
     int y0,y1;

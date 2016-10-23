@@ -2,7 +2,7 @@
 #define CIRCULO_H
 #include <figurageometrica.h>
 
-class Circulo : public FiguraGeometrica{
+class Circulo : public figuraGeometrica{
 
     int x0,y0,raio,modo;
 

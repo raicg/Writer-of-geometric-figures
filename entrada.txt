@@ -1,0 +1,6 @@
+Dim 60 20
+Brush @
+Reta 1 1 1 5
+Retangulo 3 4 3 5
+Circulo 12 14 5 0
+Circulo 14 4 5 1

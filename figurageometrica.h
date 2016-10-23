@@ -2,12 +2,12 @@
 #define FIGURAGEOMETRICA_H
 #include <screen.h>
 
-class FiguraGeometrica
+class figuraGeometrica
 {
 
 public:
 
-    FiguraGeometrica();
+    figuraGeometrica();
 
     virtual void pos(void)=0;
 

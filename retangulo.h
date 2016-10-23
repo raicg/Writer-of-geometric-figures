@@ -2,7 +2,7 @@
 #define RETANGULO_H
 #include <figurageometrica.h>
 
-class Retangulo : public FiguraGeometrica{
+class Retangulo : public figuraGeometrica{
 
     int x, y, largura, altura;
 

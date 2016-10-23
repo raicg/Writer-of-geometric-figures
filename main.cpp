@@ -1,4 +1,9 @@
 #include <iostream>
+#include <string>
+#include <vector>
+#include <sstream>
+#include <cstdlib>
+#include <fstream>
 #include "screen.h"
 #include "figurageometrica.h"
 #include "reta.h"
@@ -9,50 +14,73 @@ using namespace std;
 
 int main()
 {
-    Screen tela(30,30);
-    tela.setBrush('@');
-    Reta retaa(5,5,10,8);
-    retaa.draw(tela);
-
-    cout << tela;
-
-    tela.clear ();
+    int nlin, ncol, x0reta, y0reta, x1reta, y1reta, xretangulo, yretangulo, altura, largura, xcirculo, ycirculo, raio, modo, qntdfiguras;
+    char brush;
 
 
+    ifstream ler;
+    string linha;
+    stringstream ss;
+    ofstream escrever;
+    vector <figuraGeometrica*>  figura;
 
 
-    Retangulo retanguloo(5,6,10,20);
-    retanguloo.draw(tela);
+    ler.open("D:\\entrada.txt");
+    if (!ler.is_open()){
+        cout << "O arquivo texto para leitura nao foi encontrado" << endl;
+    }
+    else{
+        while(ler.good()){
+            getline(ler,linha);
+            if(ler.good()){
+                ss.clear();
+                ss.str(linha);
+                while(ss.good()){
+                    ss>>linha;
+                    if(linha.compare(string("Dim"))==0){
+                        ss>>nlin>>ncol;
+                    }
+                    if(linha.compare(string("Brush"))==0){
+                        ss>>brush;
+                    }
+                    if(linha.compare(string("Reta"))==0){
+                        ss>>x0reta>>y0reta>>x1reta>>y1reta;
+                        figura.push_back(new Reta(x0reta,y0reta,x1reta,y1reta));
 
-    cout << tela;
+                    }
+                    if(linha.compare(string("Retangulo"))==0){
+                        ss>>xretangulo>>yretangulo>>largura>>altura;
+                        figura.push_back(new Retangulo(xretangulo, yretangulo, largura, altura));
 
-    tela.clear ();
+                    }
+                    if(linha.compare(string("Circulo"))==0){
+                        ss>>xcirculo>>ycirculo>>raio>>modo;
+                        figura.push_back(new Circulo(xcirculo, ycirculo, raio, modo));
 
+                    }
+                }
+            }
+        }
+    }
 
+    Screen screen(nlin, ncol);
+    qntdfiguras = figura.size();
+    screen.setBrush(brush);
+    for (int i=0; i<qntdfiguras; i++){
+        figura[i]->draw(screen);
+    }
 
+    cout << screen;
 
+    escrever.open("D:\\tela.txt");
+    if(!escrever.is_open()){
+            cout << "O arquivo texto para escrita nao foi encontrado" << endl;
+        }
 
-    Circulo circuloo(10,10,5,0);
-    circuloo.draw(tela);
-
-    cout << tela;
-
-    tela.clear ();
-
-
-
-
-
-
-    Circulo circulooo(10,10,5,1);
-    circulooo.draw(tela);
-
-    cout << tela;
-
-    tela.clear ();
-
-
-
-
-    return 0;
+    if(escrever.is_open()){
+        escrever << screen;
+      }
+    escrever.close();
 }
+
+
